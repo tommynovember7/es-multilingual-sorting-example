@@ -1,0 +1,71 @@
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "高城剛"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "高城町"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "高城町"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "harman/kardon"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "柑橘系ジュース"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "youtube"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "Condé Nast"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "オレンシー・シュスー"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "オレンシ・シュスー"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "オレンジ・ジュース"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "オレンジ・シューズ"
+}
+
+POST /categories/_analyze
+{
+  "analyzer": "readingform_analyzer_ja",
+  "text": "オレンジ・シューストラップ"
+}

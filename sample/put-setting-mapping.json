@@ -1,0 +1,140 @@
+{
+  "settings": {
+    "analysis": {
+      "tokenizer": {
+        "kuromoji_ja": {
+          "type": "kuromoji_tokenizer",
+          "mode": "search",
+          "user_dictionary": "userdict_ja.txt"
+        }
+      },
+      "char_filter": {
+        "normalize_nfkd": {
+          "type": "icu_normalizer",
+          "name": "nfkc",
+          "mode": "decompose"
+        },
+        "whitespaces": {
+          "type": "pattern_replace",
+          "pattern": "\\s{2,}",
+          "replacement": "\u0020"
+        }
+      },
+      "filter": {
+        "hiragana_2_katakana": {
+          "type": "icu_transform",
+          "id": "Hiragana-Katakana"
+        }
+      },
+      "analyzer": {
+        "default_analyzer": {
+          "tokenizer": "standard",
+          "char_filter": [
+            "icu_normalizer",
+            "whitespaces",
+            "html_strip"
+          ],
+          "filter": [
+            "lowercase",
+            "stop",
+            "trim"
+          ]
+        },
+        "readingform_analyzer_ja": {
+          "type": "custom",
+          "tokenizer": "kuromoji_ja",
+          "char_filter": [
+            "normalize_nfkd",
+            "whitespaces",
+            "html_strip",
+            "kuromoji_iteration_mark"
+          ],
+          "filter": [
+            "trim",
+            "kuromoji_readingform",
+            "concatenation",
+            "hiragana_2_katakana",
+            "kuromoji_stemmer"
+          ]
+        },
+        "analyzer_ja": {
+          "type": "custom",
+          "tokenizer": "kuromoji_ja",
+          "char_filter": [
+            "icu_normalizer",
+            "whitespaces",
+            "html_strip",
+            "kuromoji_iteration_mark"
+          ],
+          "filter": [
+            "lowercase",
+            "trim",
+            "kuromoji_baseform",
+            "kuromoji_part_of_speech",
+            "ja_stop",
+            "kuromoji_number",
+            "kuromoji_stemmer"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "slug": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      }
+    },
+    "dynamic_templates": [
+      {
+        "l10n_template": {
+          "match": "l10n",
+          "match_mapping_type": "object",
+          "mapping": {
+            "type": "nested",
+            "properties": {
+              "lang": {
+                "type": "keyword",
+                "ignore_above": 5
+              },
+              "name": {
+                "type": "text",
+                "fields": {
+                  "sort_code": {
+                    "type": "text",
+                    "analyzer": "default_analyzer",
+                    "fielddata": true
+                  },
+                  "sort_code_ja": {
+                    "type": "text",
+                    "analyzer": "readingform_analyzer_ja",
+                    "fielddata": true
+                  },
+                  "keyword_ja": {
+                    "type": "text",
+                    "analyzer": "analyzer_ja"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

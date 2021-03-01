@@ -1,0 +1,58 @@
+version: "3.7"
+services:
+  es01:
+    container_name: "es01"
+    build:
+      context: docker/elasticsearch
+      dockerfile: Dockerfile
+    ports:
+      - "9200:9200"
+    environment:
+      - node.name=es01
+      - discovery.seed_hosts=es02
+      - bootstrap.memory_lock=true
+      - "cluster.initial_master_nodes=${ES_INITIAL_MASTER_NODES}"
+      - "cluster.name=${ES_CLUSTER_NAME}"
+      - "ES_JAVA_OPTS=${ES_JAVA_OPTS}"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - "./docker/.volumes/elasticsearch/es01:/usr/share/elasticsearch/data:delegated"
+      - "./docker/elasticsearch/userdict_ja.txt:/usr/share/elasticsearch/config/userdict_ja.txt:cached"
+
+  es02:
+    container_name: "es02"
+    build:
+      context: docker/elasticsearch
+      dockerfile: Dockerfile
+    environment:
+      - node.name=es02
+      - discovery.seed_hosts=es01
+      - bootstrap.memory_lock=true
+      - "cluster.initial_master_nodes=${ES_INITIAL_MASTER_NODES}"
+      - "cluster.name=${ES_CLUSTER_NAME}"
+      - "ES_JAVA_OPTS=${ES_JAVA_OPTS}"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - "./docker/.volumes/elasticsearch/es02:/usr/share/elasticsearch/data:delegated"
+      - "./docker/elasticsearch/userdict_ja.txt:/usr/share/elasticsearch/config/userdict_ja.txt:cached"
+
+  kibana:
+    container_name: "es-kibana"
+    image: "docker.elastic.co/kibana/kibana:7.11.1"
+    ports:
+      - "5601:5601"
+    environment:
+      - "ELASTICSEARCH_URL=http://es01:9200"
+      - "ELASTICSEARCH_HOSTS=http://es01:9200"
+      - "cluster.name=${ES_CLUSTER_NAME}"
+    depends_on:
+      - es01
+      - es02
+    volumes:
+      - "./docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:cached"

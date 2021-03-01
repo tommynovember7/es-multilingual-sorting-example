@@ -1,0 +1,43 @@
+{
+  "query": {
+    "nested": {
+      "path": "l10n",
+      "query": {
+        "terms": {
+          "l10n.lang": [
+            "ja",
+            "en"
+          ]
+        }
+      }
+    }
+  },
+  "sort": [
+    {
+      "l10n.name.sort_code_ja": {
+        "order": "asc",
+        "nested": {
+          "path": "l10n",
+          "filter": {
+            "term": {
+              "l10n.lang": "ja"
+            }
+          }
+        }
+      }
+    },
+    {
+      "l10n.name.sort_code": {
+        "order": "asc",
+        "nested": {
+          "path": "l10n",
+          "filter": {
+            "term": {
+              "l10n.lang": "en"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

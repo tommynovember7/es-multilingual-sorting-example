@@ -1,0 +1,8 @@
+*.dist
+.bashrc
+.idea
+docker/.env
+docker/bin
+docker/hadolint.yaml
+project
+var

@@ -1,0 +1,135 @@
+POST /categories/_doc/
+{
+  "name": "Youtube",
+  "slug": "youtube",
+  "l10n": [
+    {
+      "lang": "en",
+      "name": "youtube"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Harman Kardon",
+  "slug": "harmankardon",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "harman/kardon"
+    },
+    {
+      "lang": "en",
+      "name": "HARMANKARDON"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "高城剛",
+  "slug": "tsuyoshi-takashiro",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "高城剛"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "高城町",
+  "slug": "takaghimaci",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "高城町"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Orange Juice",
+  "slug": "orange-juice",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "オレンジ・ジュース"
+    },
+    {
+      "lang": "en",
+      "name": "Orange Juice"
+    },
+    {
+      "lang": "es",
+      "name": "Jugo de naranja"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Oransci Shuss",
+  "slug": "oransci-shuss",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "オレンシー・シュスー"
+    },
+    {
+      "lang": "en",
+      "name": "Oransci Shuss"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Orange Shoe Strap",
+  "slug": "orange-shoe-strap",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "オレンジ・シューストラップ"
+    },
+    {
+      "lang": "en",
+      "name": "Orange Shoe Strap"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Orange Shoes",
+  "slug": "orange-shoes",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "オレンジ・シューズ"
+    },
+    {
+      "lang": "en",
+      "name": "Orange Shoes"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Citrus Juice",
+  "slug": "citrus-juice",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "柑橘系ジュース"
+    },
+    {
+      "lang": "en",
+      "name": "Citrus Juice"
+    }
+  ]
+}
