@@ -1,7 +1,5 @@
 GET /_cat/indices
 
-DELETE /categories
-
 PUT categories
 {
   "settings": {
@@ -185,6 +183,58 @@ GET /categories/_search
           }
         }
       }
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Youtube",
+  "slug": "youtube",
+  "l10n": [
+    {
+      "lang": "en",
+      "name": "youtube"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "Harman Kardon",
+  "slug": "harmankardon",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "harman/kardon"
+    },
+    {
+      "lang": "en",
+      "name": "HARMANKARDON"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "高城剛",
+  "slug": "tsuyoshi-takashiro",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "高城剛"
+    }
+  ]
+}
+
+POST /categories/_doc/
+{
+  "name": "高城町",
+  "slug": "takaghimaci",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "高城町"
     }
   ]
 }
