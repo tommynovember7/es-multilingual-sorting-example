@@ -27,6 +27,14 @@ PUT categories
         "hiragana_2_katakana": {
           "type": "icu_transform",
           "id": "Hiragana-Katakana"
+        },
+        "concatenation": {
+          "type": "concatenate",
+          "token_separator": ""
+        },
+        "readingform_kana": {
+          "type": "kuromoji_readingform",
+          "use_romaji": false
         }
       },
       "analyzer": {
@@ -54,7 +62,7 @@ PUT categories
           ],
           "filter": [
             "trim",
-            "kuromoji_readingform",
+            "readingform_kana",
             "concatenation",
             "hiragana_2_katakana",
             "kuromoji_stemmer"
@@ -75,7 +83,6 @@ PUT categories
             "kuromoji_baseform",
             "kuromoji_part_of_speech",
             "ja_stop",
-            "kuromoji_number",
             "kuromoji_stemmer"
           ]
         }
@@ -83,63 +90,140 @@ PUT categories
     }
   },
   "mappings": {
-    "properties": {
-      "name": {
-        "type": "text",
-        "fields": {
-          "keyword": {
-            "type": "keyword",
-            "ignore_above": 256
-          }
+    "category": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
         }
       },
-      "slug": {
-        "type": "text",
-        "fields": {
-          "keyword": {
-            "type": "keyword",
-            "ignore_above": 256
-          }
-        }
-      }
-    },
-    "dynamic_templates": [
-      {
-        "l10n_template": {
-          "match": "l10n",
-          "match_mapping_type": "object",
-          "mapping": {
-            "type": "nested",
-            "properties": {
-              "lang": {
-                "type": "keyword",
-                "ignore_above": 5
-              },
-              "name": {
-                "type": "text",
-                "fields": {
-                  "sort_code": {
-                    "type": "text",
-                    "analyzer": "default_analyzer",
-                    "fielddata": true
-                  },
-                  "sort_code_ja": {
-                    "type": "text",
-                    "analyzer": "readingform_analyzer_ja",
-                    "fielddata": true
-                  },
-                  "keyword_ja": {
-                    "type": "text",
-                    "analyzer": "analyzer_ja"
+      "dynamic_templates": [
+        {
+          "l10n_template": {
+            "match": "l10n",
+            "match_mapping_type": "object",
+            "mapping": {
+              "type": "nested",
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "fields": {
+                    "sort_code": {
+                      "type": "string",
+                      "analyzer": "default_analyzer"
+                    },
+                    "sort_code_ja": {
+                      "type": "string",
+                      "analyzer": "readingform_analyzer_ja"
+                    },
+                    "keyword_ja": {
+                      "type": "string",
+                      "analyzer": "analyzer_ja"
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-    ]
+      ]
+    }
   }
+}
+
+POST /categories/category/
+{
+  "name": "Youtube",
+  "slug": "youtube",
+  "l10n": [
+    {
+      "lang": "en",
+      "name": "youtube"
+    }
+  ]
+}
+
+POST /categories/category/
+{
+  "name": "Jugo de naranja",
+  "slug": "jugodenaranja",
+  "l10n": [
+    {
+      "lang": "es",
+      "name": "Jugo de naranja"
+    }
+  ]
+}
+
+POST /categories/category/
+{
+  "name": "Harman Kardon",
+  "slug": "harmankardon",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "harman/kardon"
+    },
+    {
+      "lang": "en",
+      "name": "HARMANKARDON"
+    }
+  ]
+}
+
+POST /categories/category/
+{
+  "name": "高城剛",
+  "slug": "tsuyoshi-takashiro",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "高城剛"
+    }
+  ]
+}
+
+POST /categories/category/
+{
+  "name": "高城町",
+  "slug": "takaghimaci",
+  "l10n": [
+    {
+      "lang": "ja",
+      "name": "高城町"
+    }
+  ]
+}
+
+GET /categories/_search
+{
+  "query": {
+    "match_all": {}
+  },
+	"sort": [
+    {
+      "l10n.name.sort_code_ja": {
+        "order": "asc",
+        "nested_path": "l10n",
+        "nested_filter": {
+          "term": {
+            "l10n.lang": "ja"
+          }
+        }
+      }
+    },
+    {
+      "l10n.name.sort_code": {
+        "order": "asc",
+        "nested_path": "l10n"
+      }
+    }
+  ]
 }
 
 GET /categories/_search
@@ -161,12 +245,10 @@ GET /categories/_search
     {
       "l10n.name.sort_code_ja": {
         "order": "asc",
-        "nested": {
-          "path": "l10n",
-          "filter": {
-            "term": {
-              "l10n.lang": "ja"
-            }
+        "nested_path": "l10n",
+        "nested_filter": {
+          "term": {
+            "l10n.lang": "ja"
           }
         }
       }
@@ -174,67 +256,8 @@ GET /categories/_search
     {
       "l10n.name.sort_code": {
         "order": "asc",
-        "nested": {
-          "path": "l10n",
-          "filter": {
-            "term": {
-              "l10n.lang": "en"
-            }
-          }
-        }
+        "nested_path": "l10n"
       }
-    }
-  ]
-}
-
-POST /categories/_doc/
-{
-  "name": "Youtube",
-  "slug": "youtube",
-  "l10n": [
-    {
-      "lang": "en",
-      "name": "youtube"
-    }
-  ]
-}
-
-POST /categories/_doc/
-{
-  "name": "Harman Kardon",
-  "slug": "harmankardon",
-  "l10n": [
-    {
-      "lang": "ja",
-      "name": "harman/kardon"
-    },
-    {
-      "lang": "en",
-      "name": "HARMANKARDON"
-    }
-  ]
-}
-
-POST /categories/_doc/
-{
-  "name": "高城剛",
-  "slug": "tsuyoshi-takashiro",
-  "l10n": [
-    {
-      "lang": "ja",
-      "name": "高城剛"
-    }
-  ]
-}
-
-POST /categories/_doc/
-{
-  "name": "高城町",
-  "slug": "takaghimaci",
-  "l10n": [
-    {
-      "lang": "ja",
-      "name": "高城町"
     }
   ]
 }

@@ -24,6 +24,14 @@
         "hiragana_2_katakana": {
           "type": "icu_transform",
           "id": "Hiragana-Katakana"
+        },
+        "concatenation": {
+          "type": "concatenate",
+          "token_separator": ""
+        },
+        "readingform_kana": {
+          "type": "kuromoji_readingform",
+          "use_romaji": false
         }
       },
       "analyzer": {
@@ -51,7 +59,7 @@
           ],
           "filter": [
             "trim",
-            "kuromoji_readingform",
+            "readingform_kana",
             "concatenation",
             "hiragana_2_katakana",
             "kuromoji_stemmer"
@@ -72,7 +80,6 @@
             "kuromoji_baseform",
             "kuromoji_part_of_speech",
             "ja_stop",
-            "kuromoji_number",
             "kuromoji_stemmer"
           ]
         }
@@ -80,61 +87,48 @@
     }
   },
   "mappings": {
-    "properties": {
-      "name": {
-        "type": "text",
-        "fields": {
-          "keyword": {
-            "type": "keyword",
-            "ignore_above": 256
-          }
+    "category": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
         }
       },
-      "slug": {
-        "type": "text",
-        "fields": {
-          "keyword": {
-            "type": "keyword",
-            "ignore_above": 256
-          }
-        }
-      }
-    },
-    "dynamic_templates": [
-      {
-        "l10n_template": {
-          "match": "l10n",
-          "match_mapping_type": "object",
-          "mapping": {
-            "type": "nested",
-            "properties": {
-              "lang": {
-                "type": "keyword",
-                "ignore_above": 5
-              },
-              "name": {
-                "type": "text",
-                "fields": {
-                  "sort_code": {
-                    "type": "text",
-                    "analyzer": "default_analyzer",
-                    "fielddata": true
-                  },
-                  "sort_code_ja": {
-                    "type": "text",
-                    "analyzer": "readingform_analyzer_ja",
-                    "fielddata": true
-                  },
-                  "keyword_ja": {
-                    "type": "text",
-                    "analyzer": "analyzer_ja"
+      "dynamic_templates": [
+        {
+          "l10n_template": {
+            "match": "l10n",
+            "match_mapping_type": "object",
+            "mapping": {
+              "type": "nested",
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "fields": {
+                    "sort_code": {
+                      "type": "string",
+                      "analyzer": "default_analyzer"
+                    },
+                    "sort_code_ja": {
+                      "type": "string",
+                      "analyzer": "readingform_analyzer_ja"
+                    },
+                    "keyword_ja": {
+                      "type": "string",
+                      "analyzer": "analyzer_ja"
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-    ]
+      ]
+    }
   }
 }

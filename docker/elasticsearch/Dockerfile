@@ -1,7 +1,7 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.11.1
+FROM elasticsearch:2.4
 
-RUN elasticsearch-plugin install analysis-kuromoji && \
-    elasticsearch-plugin install analysis-icu
+RUN bin/plugin install analysis-kuromoji && \
+    bin/plugin install analysis-icu
 
-ADD elasticsearch-concatenation-token-filter-6.5.0.1.zip /tmp
-RUN elasticsearch-plugin install file:///tmp/elasticsearch-concatenation-token-filter-6.5.0.1.zip
+ADD elasticsearch-concatenate-2.4.6.zip /tmp
+RUN bin/plugin install file:///tmp/elasticsearch-concatenate-2.4.6.zip

@@ -16,12 +16,10 @@
     {
       "l10n.name.sort_code_ja": {
         "order": "asc",
-        "nested": {
-          "path": "l10n",
-          "filter": {
-            "term": {
-              "l10n.lang": "ja"
-            }
+        "nested_path": "l10n",
+        "nested_filter": {
+          "term": {
+            "l10n.lang": "ja"
           }
         }
       }
@@ -29,14 +27,7 @@
     {
       "l10n.name.sort_code": {
         "order": "asc",
-        "nested": {
-          "path": "l10n",
-          "filter": {
-            "term": {
-              "l10n.lang": "en"
-            }
-          }
-        }
+        "nested_path": "l10n"
       }
     }
   ]

@@ -1,4 +1,4 @@
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "Youtube",
   "slug": "youtube",
@@ -10,7 +10,7 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "Harman Kardon",
   "slug": "harmankardon",
@@ -26,7 +26,7 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "高城剛",
   "slug": "tsuyoshi-takashiro",
@@ -38,7 +38,7 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "高城町",
   "slug": "takaghimaci",
@@ -50,18 +50,14 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
-  "name": "Orange Juice",
-  "slug": "orange-juice",
+  "name": "Jugo de naranja",
+  "slug": "jugodenaranja",
   "l10n": [
     {
       "lang": "ja",
       "name": "オレンジ・ジュース"
-    },
-    {
-      "lang": "en",
-      "name": "Orange Juice"
     },
     {
       "lang": "es",
@@ -70,7 +66,7 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "Oransci Shuss",
   "slug": "oransci-shuss",
@@ -86,7 +82,7 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "Orange Shoe Strap",
   "slug": "orange-shoe-strap",
@@ -102,7 +98,7 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "Orange Shoes",
   "slug": "orange-shoes",
@@ -118,7 +114,7 @@ POST /categories/_doc/
   ]
 }
 
-POST /categories/_doc/
+POST /categories/category/
 {
   "name": "Citrus Juice",
   "slug": "citrus-juice",
