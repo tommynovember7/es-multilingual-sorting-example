@@ -13,12 +13,6 @@ POST /categories/_analyze
 POST /categories/_analyze
 {
   "analyzer": "readingform_analyzer_ja",
-  "text": "高城町"
-}
-
-POST /categories/_analyze
-{
-  "analyzer": "readingform_analyzer_ja",
   "text": "harman/kardon"
 }
 

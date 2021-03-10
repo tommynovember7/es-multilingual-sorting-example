@@ -142,51 +142,6 @@ PUT categories
   }
 }
 
-GET /categories/_search
-{
-  "query": {
-    "nested": {
-      "path": "l10n",
-      "query": {
-        "terms": {
-          "l10n.lang": [
-            "ja",
-            "en"
-          ]
-        }
-      }
-    }
-  },
-  "sort": [
-    {
-      "l10n.name.sort_code_ja": {
-        "order": "asc",
-        "nested": {
-          "path": "l10n",
-          "filter": {
-            "term": {
-              "l10n.lang": "ja"
-            }
-          }
-        }
-      }
-    },
-    {
-      "l10n.name.sort_code": {
-        "order": "asc",
-        "nested": {
-          "path": "l10n",
-          "filter": {
-            "term": {
-              "l10n.lang": "en"
-            }
-          }
-        }
-      }
-    }
-  ]
-}
-
 POST /categories/_doc/
 {
   "name": "Youtube",
@@ -235,6 +190,51 @@ POST /categories/_doc/
     {
       "lang": "ja",
       "name": "高城町"
+    }
+  ]
+}
+
+GET /categories/_search
+{
+  "query": {
+    "nested": {
+      "path": "l10n",
+      "query": {
+        "terms": {
+          "l10n.lang": [
+            "ja",
+            "en"
+          ]
+        }
+      }
+    }
+  },
+  "sort": [
+    {
+      "l10n.name.sort_code_ja": {
+        "order": "asc",
+        "nested": {
+          "path": "l10n",
+          "filter": {
+            "term": {
+              "l10n.lang": "ja"
+            }
+          }
+        }
+      }
+    },
+    {
+      "l10n.name.sort_code": {
+        "order": "asc",
+        "nested": {
+          "path": "l10n",
+          "filter": {
+            "term": {
+              "l10n.lang": "en"
+            }
+          }
+        }
+      }
     }
   ]
 }
