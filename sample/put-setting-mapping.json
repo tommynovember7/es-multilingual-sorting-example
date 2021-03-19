@@ -11,8 +11,8 @@
       "char_filter": {
         "normalize_nfkd": {
           "type": "icu_normalizer",
-          "name": "nfkc",
-          "mode": "decompose"
+          "name": "nfc",
+          "mode": "compose"
         },
         "whitespaces": {
           "type": "pattern_replace",
@@ -24,10 +24,6 @@
         "hiragana_2_katakana": {
           "type": "icu_transform",
           "id": "Hiragana-Katakana"
-        },
-        "concatenation": {
-          "type": "concatenate",
-          "token_separator": ""
         },
         "readingform_kana": {
           "type": "kuromoji_readingform",
@@ -59,10 +55,9 @@
           ],
           "filter": [
             "trim",
-            "readingform_kana",
-            "concatenation",
             "hiragana_2_katakana",
-            "kuromoji_stemmer"
+            "kuromoji_stemmer",
+            "readingform_kana"
           ]
         },
         "analyzer_ja": {
