@@ -30,6 +30,5 @@ docker logs -f es01
 `ICU` and `kuromoji` are officially supported plugins, but the 
 `Elasticsearch concatenation token filter` is a community provided one:
 
-- [ICU Analysis Plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/2.4/analysis-icu.html)
-- [Japanese (kuromoji) Analysis Plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/2.4/analysis-kuromoji.html)
-- [Elasticsearch concatenation token filter](https://github.com/eyeem/elasticsearch-concatenate-token-filter) (community plugin)
+- [ICU Analysis Plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/2.3/analysis-icu.html)
+- [Japanese (kuromoji) Analysis Plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/2.3/analysis-kuromoji.html)
