@@ -9,7 +9,7 @@
         }
       },
       "char_filter": {
-        "normalize_nfkd": {
+        "normalize_nfc": {
           "type": "icu_normalizer",
           "name": "nfc",
           "mode": "compose"
@@ -48,7 +48,7 @@
           "type": "custom",
           "tokenizer": "kuromoji_ja",
           "char_filter": [
-            "normalize_nfkd",
+            "normalize_nfc",
             "whitespaces",
             "html_strip",
             "kuromoji_iteration_mark"
