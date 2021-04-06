@@ -1,2 +1,2 @@
-harman/kardon,harman kardon,ハーマン カードン,カスタム名詞
+harman/kardon,harmankardon,ハーマンカードン,カスタム名詞
 高城剛,高城 剛,タカシロ ツヨシ,カスタム名詞
